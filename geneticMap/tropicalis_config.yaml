@@ -1,0 +1,9 @@
+reference: ref/genome.fa
+fastqfile: reads.txt
+priors:
+  p1p1: 0.5
+  p1p2: 0.0
+  p2p2: 0.5
+callParentalSNPs: 1
+mapper: bwa-mem2
+

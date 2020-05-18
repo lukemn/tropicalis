@@ -1,0 +1,132 @@
+sampletype	sample	r1	r2	se
+parents	NIC58	/scratch/cgsb/rockman/open/NIC58_NYU_NW_F.fastq.gz	/scratch/cgsb/rockman/open/NIC58_NYU_NW_R.fastq.gz
+parents	JU1373	/scratch/cgsb/rockman/open/JU1373-1_GTGGCC_L003_R1_001.fastq.gz	/scratch/cgsb/rockman/open/JU1373-1_GTGGCC_L003_R2_001.fastq.gz
+rils	qg2471			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2471.SE.fastq.gz
+rils	qg2472			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2472.SE.fastq.gz
+rils	qg2473	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2473.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2473.R.fastq.gz	
+rils	qg2474			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2474.SE.fastq.gz
+rils	qg2475	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2475.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2475.R.fastq.gz	
+rils	qg2476	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2476.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2476.R.fastq.gz	
+rils	qg2477	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2477.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2477.R.fastq.gz	
+rils	qg2478	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2478.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2478.R.fastq.gz	
+rils	qg2479			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2479.SE.fastq.gz
+rils	qg2480	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2480.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2480.R.fastq.gz	
+rils	qg2481			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2481.SE.fastq.gz
+rils	qg2482			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2482.SE.fastq.gz
+rils	qg2483			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2483.SE.fastq.gz
+rils	qg2484	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2484.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2484.R.fastq.gz	
+rils	qg2485			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2485.SE.fastq.gz
+rils	qg2486			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2486.SE.fastq.gz
+rils	qg2487	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2487.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2487.R.fastq.gz	
+rils	qg2489	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2489.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2489.R.fastq.gz	
+rils	qg2490			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2490.SE.fastq.gz
+rils	qg2491	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2491.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2491.R.fastq.gz	
+rils	qg2492			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2492.SE.fastq.gz
+rils	qg2493			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2493.SE.fastq.gz
+rils	qg2494			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2494.SE.fastq.gz
+rils	qg2495	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2495.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2495.R.fastq.gz	
+rils	qg2496	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2496.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2496.R.fastq.gz	
+rils	qg2497	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2497.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2497.R.fastq.gz	
+rils	qg2498	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2498.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2498.R.fastq.gz	
+rils	qg2499	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2499.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2499.R.fastq.gz	
+rils	qg2500			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2500.SE.fastq.gz
+rils	qg2501	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2501.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2501.R.fastq.gz	
+rils	qg2502			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2502.SE.fastq.gz
+rils	qg2503			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2503.SE.fastq.gz
+rils	qg2504			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2504.SE.fastq.gz
+rils	qg2505			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2505.SE.fastq.gz
+rils	qg2506	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2506.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2506.R.fastq.gz	
+rils	qg2507			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2507.SE.fastq.gz
+rils	qg2508			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2508.SE.fastq.gz
+rils	qg2509			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2509.SE.fastq.gz
+rils	qg2510			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2510.SE.fastq.gz
+rils	qg2511	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2511.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2511.R.fastq.gz	
+rils	qg2512	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2512.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2512.R.fastq.gz	
+rils	qg2513			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2513.SE.fastq.gz
+rils	qg2514	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2514.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2514.R.fastq.gz	
+rils	qg2515			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2515.SE.fastq.gz
+rils	qg2516	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2516.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2516.R.fastq.gz	
+rils	qg2517			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2517.SE.fastq.gz
+rils	qg2518			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2518.SE.fastq.gz
+rils	qg2519			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2519.SE.fastq.gz
+rils	qg2520			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2520.SE.fastq.gz
+rils	qg2521	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2521.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2521.R.fastq.gz	
+rils	qg2522			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2522.SE.fastq.gz
+rils	qg2523	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2523.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2523.R.fastq.gz	
+rils	qg2524			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2524.SE.fastq.gz
+rils	qg2525	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2525.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2525.R.fastq.gz	
+rils	qg2526			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2526.SE.fastq.gz
+rils	qg2527			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2527.SE.fastq.gz
+rils	qg2528			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2528.SE.fastq.gz
+rils	qg2529			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2529.SE.fastq.gz
+rils	qg2530			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2530.SE.fastq.gz
+rils	qg2531			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2531.SE.fastq.gz
+rils	qg2532			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2532.SE.fastq.gz
+rils	qg2533			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2533.SE.fastq.gz
+rils	qg2534			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2534.SE.fastq.gz
+rils	qg2535			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2535.SE.fastq.gz
+rils	qg2536			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2536.SE.fastq.gz
+rils	qg2537			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2537.SE.fastq.gz
+rils	qg2538	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2538.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2538.R.fastq.gz	
+rils	qg2539			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2539.SE.fastq.gz
+rils	qg2540			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2540.SE.fastq.gz
+rils	qg2541			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2541.SE.fastq.gz
+rils	qg2542	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2542.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2542.R.fastq.gz	
+rils	qg2543			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2543.SE.fastq.gz
+rils	qg2544	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2544.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2544.R.fastq.gz	
+rils	qg2545			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2545.SE.fastq.gz
+rils	qg2546			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2546.SE.fastq.gz
+rils	qg2547	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2547.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2547.R.fastq.gz	
+rils	qg2548			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2548.SE.fastq.gz
+rils	qg2549			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2549.SE.fastq.gz
+rils	qg2550			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2550.SE.fastq.gz
+rils	qg2551			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2551.SE.fastq.gz
+rils	qg2552			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2552.SE.fastq.gz
+rils	qg2553			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2553.SE.fastq.gz
+rils	qg2554	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2554.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2554.R.fastq.gz	
+rils	qg2555	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2555.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2555.R.fastq.gz	
+rils	qg2556	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2556.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2556.R.fastq.gz	
+rils	qg2557			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2557.SE.fastq.gz
+rils	qg2558			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2558.SE.fastq.gz
+rils	qg2559	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2559.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2559.R.fastq.gz	
+rils	qg2560			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2560.SE.fastq.gz
+rils	qg2561	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2561.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2561.R.fastq.gz	
+rils	qg2562	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2562.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2562.R.fastq.gz	
+rils	qg2563			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2563.SE.fastq.gz
+rils	qg2564			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2564.SE.fastq.gz
+rils	qg2565			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2565.SE.fastq.gz
+rils	qg2566			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2566.SE.fastq.gz
+rils	qg2567	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2567.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2567.R.fastq.gz	
+rils	qg2568			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2568.SE.fastq.gz
+rils	qg2569			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2569.SE.fastq.gz
+rils	qg2570			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2570.SE.fastq.gz
+rils	qg2571			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2571.SE.fastq.gz
+rils	qg2572	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2572.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2572.R.fastq.gz	
+rils	qg2573			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2573.SE.fastq.gz
+rils	qg2574			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2574.SE.fastq.gz
+rils	qg2575			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2575.SE.fastq.gz
+rils	qg2576	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2576.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2576.R.fastq.gz	
+rils	qg2577			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2577.SE.fastq.gz
+rils	qg2578			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2578.SE.fastq.gz
+rils	qg2579			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2579.SE.fastq.gz
+rils	qg2580			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2580.SE.fastq.gz
+rils	qg2581			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2581.SE.fastq.gz
+rils	qg2582			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2582.SE.fastq.gz
+rils	qg2583			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2583.SE.fastq.gz
+rils	qg2584			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2584.SE.fastq.gz
+rils	qg2585			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2585.SE.fastq.gz
+rils	qg2586	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2586.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2586.R.fastq.gz	
+rils	qg2587			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2587.SE.fastq.gz
+rils	qg2588			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2588.SE.fastq.gz
+rils	qg2589			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2589.SE.fastq.gz
+rils	qg2590			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2590.SE.fastq.gz
+rils	qg2591	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2591.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2591.R.fastq.gz	
+rils	qg2592	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2592.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2592.R.fastq.gz	
+rils	qg2593			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2593.SE.fastq.gz
+rils	qg2594	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2594.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2594.R.fastq.gz	
+rils	qg2595			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2595.SE.fastq.gz
+rils	qg2596	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2596.F.fastq.gz	/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2596.R.fastq.gz	
+rils	qg2597			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2597.SE.fastq.gz
+rils	qg2598			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2598.SE.fastq.gz
+rils	qg2599			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2599.SE.fastq.gz
+rils	qg2600			/scratch/cgsb/rockman/open/ctrop_RIL_fastq/qg2600.SE.fastq.gz
