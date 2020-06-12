@@ -1058,6 +1058,8 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
     ## NIC58 round 1: 5/6 cases irreconcilable phys/genetic discordance, but all < 0.5cM
     # omap <- fixBadDiffs_NIC58_flye(omap)
     ## NIC58 round 3: 3 cases irreconcilable phys/genetic discordance, but all < 0.5cM
+    # omap <- fixBadDiffs_NIC58_flye_stitch1(omap)
+    # omap <- fixBadDiffs_NIC58_flye_stitch2(omap)
     
     osum = aggregate(data = omap, diff~ori, sum)
     if(!0 %in% osum$ori) osum = rbind(osum, data.frame(ori=0, diff=0))
