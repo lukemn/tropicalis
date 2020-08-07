@@ -1,0 +1,241 @@
+#!/bin/bash
+
+import pandas as pd
+import numpy as np
+from os import path, getcwd
+from os.path import basename
+from sys import stderr
+
+configfile: "config.yaml"
+# reference: path (fasta)
+# fastqfile: path (sample, fastq R1, R2)
+# mapper (bwa | bwa-mem2)
+mapper = config['mapper']
+
+if mapper == "bwa-mem2":
+    bwt=config['reference']+".bwt.2bit.64"
+else:
+    bwt=config['reference']+".bwt"
+    
+def checkExternalDependencies():
+    shell("which samtools &> /dev/null")
+    shell("which {} &> /dev/null".format(mapper))    
+    shell("which bcftools &> /dev/null")    
+    shell("which Rscript &> /dev/null")
+    shell("which bedtools &> /dev/null")
+    shell("which gatk &> /dev/null")    
+    shell("if [[ -z $PICARD_JAR ]]; then echo PICARD_JAR unset; exit 1; fi")
+    shell("if [[ -z $SLURM_JOB_TMP ]]; then echo SLURM_JOB_TMP unset; exit 1; fi")
+
+checkExternalDependencies()
+
+samples = pd.read_csv(config['fastqfile'], sep='\t')['sample'].values
+
+def getChroms():
+    ref = config['reference']
+    fai = ref+".fai"
+    if not path.exists(fai):
+        shell("samtools faidx {ref}")
+    chroms = pd.read_csv(fai, sep="\t", header=None)[0].values
+    return(chroms)
+    
+chroms=getChroms()    
+
+rule all:
+    input:
+        expand("bam/{sample}.bam", sample=samples),
+        expand("bam/{sample}.stats", sample=samples),
+        expand("gvcf/{sample}.gvcf.gz", sample=samples),
+        "merge/merged_gatk.vcf.gz"
+
+rule index_ref:
+    """
+    make bwa index, gatk dict
+    """
+    input:
+        config['reference']
+    output:        
+        bwt,
+        dict="ref/genome.dict"
+    resources:
+        mem_mb=2000        
+    shell:
+        """
+        {mapper} index {input}
+        java -Xmx{resources.mem_mb}m -Djava.io.tmpdir=$SLURM_JOB_TMP -jar $PICARD_JAR \
+            CreateSequenceDictionary R={input} O={output.dict}
+        """
+        
+rule make_chromosome_beds:
+    """
+    bed file for each sequence in the reference, 
+    for parallel GATK
+    """
+    input:
+        config['reference']+".fai"
+    output:
+        expand("ref/{chrom}.bed", chrom=chroms)
+    shell:
+        """
+        awk '{{OFS="\t"; print $1,0,$2 > "ref/"$1".bed"}}' {input}
+        """
+
+# rule make_interval_beds:
+#     """
+#     ND
+#     bed windows per chromosome for parallel GATK
+#     """
+                
+rule map_reads:
+    """
+    Filter out unmapped reads
+    """
+    input:
+        bwt,
+        F="reads/{sample}.F.fq.gz",
+        R="reads/{sample}.R.fq.gz",                
+        ref=config['reference']
+    output:
+        temp("bam/{sample}_1.bam")
+    params:
+        rg=r"@RG\tID:{sample}\tSM:{sample}",
+    threads: 20
+    log:
+        "bam/{sample}.log"
+    shell: 
+        "{mapper} mem -t {threads} -R '{params.rg}' {input.ref} "
+        "{input.F} {input.R} 2> {log} | "
+        "samtools view -@ {threads} -b -F4 - > {output} 2> {log}"
+
+rule samtools_sort:
+    input:
+        "bam/{sample}_1.bam"
+    output:
+        "bam/{sample}.bam"
+    threads: 8
+    resources:
+        mem_mb=2000
+    shell:
+        "samtools sort -m {resources.mem_mb}M -@ {threads} "
+        "-T bam/{wildcards.sample} "
+        "-O bam {input} > {output}"
+        
+rule samtools_index:
+    input: 
+        "bam/{sample}.bam"
+    output:
+        "bam/{sample}.bam.bai"
+    shell:
+        "samtools index {input}"
+
+rule aln_stats:
+    input:
+        bwt,
+        ref=config['reference'],
+        bam="bam/{sample}.bam",
+        bai="bam/{sample}.bam.bai"
+    output:
+        "bam/{sample}.stats"
+    shell:
+        "samtools stats {input.bam} > {output}"
+
+rule gatk_gvcf:
+    input:
+        bwt,
+        ref=config['reference'],
+        bam="bam/{sample}.bam",
+        bai="bam/{sample}.bam.bai"
+    output:
+        "gvcf/{sample}.gvcf.gz"
+    log:
+        "gvcf/{sample}.log"        
+    resources:
+        mem_mb=2000
+    shell:
+        """
+        gatk --java-options "-Xmx{resources.mem_mb}m 
+            -Djava.io.tmpdir=$SLURM_JOB_TMP" HaplotypeCaller -ERC GVCF \
+            -R {input.ref} -I {input.bam} -O {output} &> {log}
+        """
+        
+rule make_gvcf_list:
+    input:        
+        expand("gvcf/{sample}.gvcf.gz", sample=samples)
+    output:
+        "gvcf/gvcf.list"
+    run:
+        wd = os.getcwd()
+        gvcfs = pd.DataFrame.from_dict({samples[i]:['{}/{}'.format(wd, input[i])] for i in range(len(samples))}, orient='index')
+        gvcfs.to_csv("gvcf/gvcf.list", sep='\t', header=0)
+
+rule gatk_db_byChromosome:
+    input:
+        bwt,
+        ref=config['reference'],
+        flist="gvcf/gvcf.list",
+        bed="ref/{chrom}.bed"
+    output:
+        directory("db/{chrom}.db")
+    log:
+        "db/{chrom}.log"                
+    threads: 2        
+    resources:
+        mem_mb=8000
+    shell:
+        """
+        gatk --java-options "-Xmx{resources.mem_mb}m 
+            -Djava.io.tmpdir=$SLURM_JOB_TMP" GenomicsDBImport \
+            --genomicsdb-workspace-path {output} \
+            -L {input.bed} --tmp-dir=$SLURM_JOB_TMP \
+            --sample-name-map {input.flist} \
+            --overwrite-existing-genomicsdb-workspace true \
+            --reader-threads {threads} \
+            --disable-tool-default-read-filters true &> {log}
+        """
+
+rule gatk_genotype_byChromosome:
+    input:
+        ref=config['reference'],
+        bed="ref/{chrom}.bed",
+        db="db/{chrom}.db"        
+    output:
+        "genotype/{chrom}_gatk.vcf.gz"
+    log:
+        "genotype/{chrom}.log"
+    resources:
+        mem_mb=4000        
+    shell:
+        """
+        gatk --java-options "-Xmx{resources.mem_mb}m 
+            -Djava.io.tmpdir=$SLURM_JOB_TMP" GenotypeGVCFs \
+            -R {input.ref} -L {input.bed} -V gendb://{input.db} -O {output}
+        """
+
+rule norm_indels:
+    input:
+        ref=config['reference'],
+        vcf="genotype/{chrom}_gatk.vcf.gz"
+    output:
+        "genotype/{chrom}_gatk_norm.vcf.gz"
+    log:
+        "genotype/{chrom}.norm.log"
+    threads: 6        
+    shell:
+        "bcftools norm -m+ --threads {threads} -f {input.ref} {input.vcf} > {output}"
+
+rule merge_calls:
+    input:
+        expand("genotype/{chrom}_gatk_norm.vcf.gz", chrom=chroms)
+    output:
+        vcf="merge/merged_gatk.vcf.gz",
+        quals="merge/merged_gatk.quals.gz",
+        geno="merge/merged_gatk.geno.gz"
+    threads: 6                
+    shell:
+        """
+        bcftools concat -O z --threads {threads} {input} > {output.vcf}
+        zcat {output.vcf} | grep -v '##' | cut -f1,2,4,5,6,8 | gzip > {output.quals}
+        zcat {output.vcf} | scripts/vcfSampleGT.py | gzip > {output.geno}
+        """
+    
+

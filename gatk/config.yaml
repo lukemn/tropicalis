@@ -1,0 +1,3 @@
+reference: ref/genome.fa
+fastqfile: fastqfile
+mapper: bwa-mem2
