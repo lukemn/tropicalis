@@ -193,7 +193,7 @@ startingMap <- function(WD, pref, XO_MAD_quantiles=c(0.9, 0.95, 0.99, 1)){
   f = as.numeric(lod) > 2
   rfd = data.frame(x = as.numeric(rf)[f], y = as.numeric(lod)[f])
   p <- ggplot(rfd, aes(x, y)) + geom_point(alpha=0.5, stroke=0) + theme_classic() + labs(x="Recombination fraction", y="LOD score") + geom_rug()
-  ggsave(sprintf('%s/RF_LOD.png', WD))
+  ggsave(sprintf('%s/RF_LOD.pdf', WD))
   
   # check LOD ~ LGs
   lodr = range(round(quantile(rfd$y[rfd$x<0.25], c(0.5, 0.85), na.rm=T)))
@@ -335,7 +335,7 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
   
   # dupe list > df
   duped <- data.frame(dupe = unlist(dupeList), stringsAsFactors = F)
-  duped$marker <- rep(names(dupeList), sapply(dupeList, len))
+  duped$marker <- rep(names(dupeList), sapply(dupeList, length))
   duped$scaf<- unlist(lapply(strsplit(duped$dupe, nameSplitChar, fixed = T), '[[', 1))
   duped <- merge(duped, mpos[,c('dupe', 'start', 'end')], sort=F)
   duped <- duped[order(duped$marker, duped$start),]
@@ -650,7 +650,7 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
       
       # get marker : dupe physical coordinates from dupe list
       duped <- data.frame(dupe = unlist(dupeList), stringsAsFactors = F)
-      duped$marker <- rep(names(dupeList), sapply(dupeList, len))
+      duped$marker <- rep(names(dupeList), sapply(dupeList, length))
       duped$scaf<- unlist(lapply(strsplit(duped$dupe, nameSplitChar, fixed = T), '[[', 1))
       duped <- merge(duped, mpos[,c('dupe', 'start', 'end')], sort=F)
       duped <- duped[order(duped$marker, duped$start),]
