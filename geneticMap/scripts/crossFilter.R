@@ -63,7 +63,7 @@ getOri = function(y, gte=F, tol=0, dominant=F){
   # vector orientation
   # ascending=F
   y <- y[!is.na(y)]
-  if(len(y)<2) return(NA)
+  if(length(y)<2) return(NA)
   if(gte) mdiff = diff(y) >= -tol else mdiff = diff(y) > -tol
   if(all(mdiff)) return(F)
   if(all(!mdiff)) return(T)
@@ -125,7 +125,7 @@ startingMap <- function(WD, pref, XO_MAD_quantiles=c(0.9, 0.95, 0.99, 1)){
   cscaf = unique(unlist(lapply(pull.map(cross), function(x) tstrsplit(names(x), nameSplitChar, fixed = T)[[1]])))
   allscaf = unique(c(tagscaf, dupscaf, cscaf))
   fullen = sum(fai$len[fai$scaf %in% allscaf])
-  cat(sprintf('collapse %s dupes to %s tags (spanning %.2f Mb), %.2f covered by all %s marker scaffolds\n', len(unlist(dupes)), len(dupes), taglen/1e6, fullen/1e6, len(allscaf)))
+  cat(sprintf('collapse %s dupes to %s tags (spanning %.2f Mb), %.2f covered by all %s marker scaffolds\n', length(unlist(dupes)), length(dupes), taglen/1e6, fullen/1e6, length(allscaf)))
   cross <- drop.markers(cross, unlist(dupes))
   summary(cross)
   
@@ -169,11 +169,11 @@ startingMap <- function(WD, pref, XO_MAD_quantiles=c(0.9, 0.95, 0.99, 1)){
   todrop = names(mna)[mna < (nind(cross)*(1-maxMarkerNA))]
   keepchr = sapply(strsplit(names(mna)[!names(mna) %in% todrop], nameSplitChar, fixed = T), '[[', 1)
   dropchr <- unique(sapply(strsplit(todrop, nameSplitChar, fixed = T), '[[', 1))
-  if(len(dropchr)>0) {
+  if(length(dropchr)>0) {
     mrep = minrep = sum(!dropchr %in% unique(keepchr))
     minrep = min(sapply(dropchr, function(x) sum(keepchr==x)))
     lostd = sum(subset(fai, scaf%in%dropchr[!dropchr %in% keepchr])$len)
-    sprintf('dropping %s markers due to missing data (>%.2f), %s sole scaffold markers (%.2f Kb)', len(todrop), maxMarkerNA, mrep, lostd/1000)
+    sprintf('dropping %s markers due to missing data (>%.2f), %s sole scaffold markers (%.2f Kb)', length(todrop), maxMarkerNA, mrep, lostd/1000)
     cross <- drop.markers(cross, todrop)
     summary(cross)
   }
@@ -345,7 +345,7 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
     gmap <- pull.map(cross, chr = lgs)
     mapn = names(unlist(gmap))
     mapdf <- data.frame(genetic=as.numeric(unlist(gmap)), 
-                        ix = unlist(sapply(gmap, function(i) 1:len(i))),
+                        ix = unlist(sapply(gmap, function(i) 1:length(i))),
                         marker = gsub('^[1-9].', '', mapn),
                         lg = tstrsplit(mapn, '.', fixed = T)[[1]],
                         stringsAsFactors = F
@@ -399,7 +399,7 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
               ori1 = table(diff(scafx$start)>0)
               ori2 = table(diff(subset(xo, dupe==F)$start)>0)
               oris = ori1; if(max(ori2)>max(oris)) oris = ori2
-              stopifnot(len(oris)==2)
+              stopifnot(length(oris)==2)
               if(oris[1]>oris[2]){
                 # rev
                 xo = xo[order(xo$start, decreasing = T),]
@@ -453,7 +453,7 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
     sus = subset(od, ori<1)
     suscaf = unique(sus[,c('scaf', 'ori')])
     cat(sprintf('%s: Of %s contigs in the map, %s are unorientable, %s are discordant (spanning %s and %s bp)\n', 
-                pref, len(unique(od$scaf)), sum(suscaf$ori==0), sum(suscaf$ori>0), sum(subset(fai, scaf %in% suscaf$scaf[suscaf$ori==0])$len), sum(subset(fai, scaf %in% suscaf$scaf[suscaf$ori>0])$len)))
+                pref, length(unique(od$scaf)), sum(suscaf$ori==0), sum(suscaf$ori>0), sum(subset(fai, scaf %in% suscaf$scaf[suscaf$ori==0])$len), sum(subset(fai, scaf %in% suscaf$scaf[suscaf$ori>0])$len)))
     
     # check likelihoods for all changes
     # the oriented order is in column 'o'
@@ -507,14 +507,14 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
       jumps = sapply(names(disco), function(i) diff(range(which(rl$values==i))))
       dscaf = names(disco)[order(jumps)]
       k=1; it=1
-      while(len(dscaf)>0){
+      while(length(dscaf)>0){
         cix = which(rl$values==dscaf[k])
-        if(len(cix)>2) cix=cix[1:2]
+        if(length(cix)>2) cix=cix[1:2]
         inner = rl$value[(min(cix)+1):(max(cix)-1)]
         ixes = which(x$scaf==dscaf[k])
         ixes = ixes[ixes <= sum(rl$lengths[1:max(cix)])]
         ixg = diff(ixes)>1
-        ixl = ixes[1:which(ixg)]; ixr = ixes[(which(ixg)+1):len(ixes)]
+        ixl = ixes[1:which(ixg)]; ixr = ixes[(which(ixg)+1):length(ixes)]
         l = rev(ixl)[1]; ll = ixl[1]
         r = ixr[1]; rr = rev(ixr)[1]
         inix = (l+1):(r-1)
@@ -529,12 +529,12 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
         # x[(l-1):(r+1),]
         
         # if an outer is terminal, then see if we can clump it, else deal with the inners
-        if(len(inner)>1 & (min(ixl)==1 | max(ixr)==nrow(x))){
+        if(length(inner)>1 & (min(ixl)==1 | max(ixr)==nrow(x))){
           cat(sprintf('Terminal case\n'))
           cat(sprintf('LG %s genetic conflict %s-%s-%s: %.3f-%.3f<->%.3f-%.3f cM\n', lgx, dscaf[k], inner, dscaf[k], lgenc, lgen, rgen, rgenc))
           # small > large
-          nl = len(ixl)
-          nr = len(ixr)
+          nl = length(ixl)
+          nr = length(ixr)
           if(nr>=nl){
             lo = c(inix, ixl, r:nrow(x)); while(min(lo)>1) lo = c(min(lo)-1, lo)
             lik = compareorder(cross, chr=lgx, order = lo, map.function = 'morgan')[2,1]
@@ -555,7 +555,7 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
             }
           }
         } else {
-          if(len(igd)>1){
+          if(length(igd)>1){
             # conflict with genetic order
             cat(sprintf('LG %s genetic conflict %s-%s-%s: %.3f-%.3f<->%.3f-%.3f cM\n', lgx, dscaf[k], inner, dscaf[k], lgenc, lgen, rgen, rgenc))
             
@@ -606,13 +606,13 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
         disco = rlt[rlt>1]
         dscafi = dscaf
         dscaf = NULL
-        if(len(disco)>0){
+        if(length(disco)>0){
           jumps = sapply(names(disco), function(i) min(diff(which(rl$values==i))))
           dscaf = names(disco)[order(jumps)]
         }
-        if(sum(dscafi %in% dscaf)==len(dscaf)) break
+        if(sum(dscafi %in% dscaf)==length(dscaf)) break
         it = it+1
-        k = min(len(dscaf), k+1)
+        k = min(length(dscaf), k+1)
       }
       x$o = 1:nrow(x)
       x
@@ -697,7 +697,7 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
           sx = x$scaf[1]
           # may be able to orient from duplicate genetic data
           # scafx = x[!duplicated(x$genetic),]
-          if(nrow(scafx)==1 & len(unique(x$genetic)>1)) {
+          if(nrow(scafx)==1 & length(unique(x$genetic)>1)) {
             udupe = subset(x, marker_scaf!=sx)
             scafx <- rbind(scafx, udupe[!duplicated(udupe$genetic),])
           }
@@ -726,7 +726,7 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
                 ori1 = table(diff(scafx$start)>0)
                 ori2 = table(diff(subset(xo, dupe==F)$start)>0)
                 oris = ori1; if(max(ori2)>max(oris)) oris = ori2
-                stopifnot(len(oris)==2)
+                stopifnot(length(oris)==2)
                 if(oris[1]>oris[2]){
                   # rev
                   ox = cbind(getTermini(sx, xo, T), ori=oris[1]/sum(oris), strand='-')
@@ -777,21 +777,21 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
         jumps = sapply(names(disco), function(i) diff(range(which(rl$values==i))))
         dscaf = names(disco)[order(jumps)]
         k=1; it=1
-        while(len(dscaf)>0 & it<3){
+        while(length(dscaf)>0 & it<3){
           cix = which(rl$values==dscaf[k])
-          if(len(cix)>2) cix=cix[1:2]
+          if(length(cix)>2) cix=cix[1:2]
           inner = rl$value[(min(cix)+1):(max(cix)-1)]
           # compare genetic/physical distances of inner to container
           # ixes = which(x$marker_scaf==dscaf[k])
           ixes = which(x$scaf==dscaf[k])
           ixes = ixes[ixes <= sum(rl$lengths[1:max(cix)])]
           ixg = diff(ixes)>1
-          ixl = ixes[1:which(ixg)]; ixr = ixes[(which(ixg)+1):len(ixes)]
+          ixl = ixes[1:which(ixg)]; ixr = ixes[(which(ixg)+1):length(ixes)]
           l = rev(ixl)[1]; ll = ixl[1]
           r = ixr[1]; rr = rev(ixr)[1]
           lg = x$genetic[l]; rg = x$genetic[r]
           igd = unique(x$genetic[(l+1):(r-1)])
-          if(len(igd)==1){
+          if(length(igd)==1){
             lgen = igd-lg; rgen = rg-igd
             lphy = sum(x$diff[ll:l]); rphy = sum(x$diff[r:rr])
             cat(sprintf('%s LG %s case %s %s-%s-%s: %.3f<cM>%.3f %.3f<kb>%.3f\n', 
@@ -801,9 +801,9 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
             # x[(l-1):(r+1),]
             # x[(l-10):(r+10),]
             xx = x[(ll):(rr),]
-            inrl = len(rle(xx$scaf)$values)
-            ax = xx[order(xx$scaf),]; ax = ax[order(ax$genetic),]; arl = len(rle(ax$scaf)$values)
-            dx = xx[order(xx$scaf, decreasing = T),]; dx = dx[order(dx$genetic),]; drl = len(rle(dx$scaf)$values)
+            inrl = length(rle(xx$scaf)$values)
+            ax = xx[order(xx$scaf),]; ax = ax[order(ax$genetic),]; arl = length(rle(ax$scaf)$values)
+            dx = xx[order(xx$scaf, decreasing = T),]; dx = dx[order(dx$genetic),]; drl = length(rle(dx$scaf)$values)
             
             if(arl < inrl) {
               x[ll:rr,] <- ax
@@ -824,7 +824,7 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
           jumps = sapply(names(disco), function(i) diff(range(which(rl$values==i))))
           dscaf = names(disco)[order(jumps)]        
           it = it+1
-          k = min(len(dscaf), k+1)
+          k = min(length(dscaf), k+1)
         }
         x
       }))
@@ -869,8 +869,8 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
             }
             # check for remaining sus large diffs
             lix = which(y$diff>1e6)
-            if(len(lix)>0){
-              cat(sprintf('LG %s: %s setting %s sus diffs > 1Mb to NA\n', y$lg[1], y$scaf[1], len(lix)))
+            if(length(lix)>0){
+              cat(sprintf('LG %s: %s setting %s sus diffs > 1Mb to NA\n', y$lg[1], y$scaf[1], length(lix)))
               for(i in lix){
                 print(y[(i-1):(i+1),-c(9:12)])
                 cat('\n')
@@ -900,9 +900,9 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
       }))
       rownames(ooo) = NULL
       
-      # sapply(split(d, d$lg), function(x) {rlt = table(rle(x$scaf)$values); len(rlt[rlt>1])})
-      # sapply(split(o, o$lg), function(x) {rlt = table(rle(x$scaf)$values); len(rlt[rlt>1])})
-      # sapply(split(oo, oo$lg), function(x) {rlt = table(rle(x$scaf)$values); len(rlt[rlt>1])})
+      # sapply(split(d, d$lg), function(x) {rlt = table(rle(x$scaf)$values); length(rlt[rlt>1])})
+      # sapply(split(o, o$lg), function(x) {rlt = table(rle(x$scaf)$values); length(rlt[rlt>1])})
+      # sapply(split(oo, oo$lg), function(x) {rlt = table(rle(x$scaf)$values); length(rlt[rlt>1])})
       ooo      
     }
     
@@ -1067,7 +1067,7 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
     orit = table(factor(c(0,1,0.5))); orit[]=0
     ot = table(unique(omap[,c('scaf', 'ori')])$ori)
     if('0' %in% names(ot)) orit[1] = ot[names(ot)=='0']
-    if(len(ot[as.numeric(names(ot)) %% 1])>0) orit[2] = ot[as.numeric(names(ot)) %% 1 > 0]
+    if(length(ot[as.numeric(names(ot)) %% 1])>0) orit[2] = ot[as.numeric(names(ot)) %% 1 > 0]
     if('1' %in% names(ot)) orit[3] = ot[names(ot)=='1']
     
     cat(sprintf('%s After duplicate and termini addition:\n%.2f Mb ordered (%s contig)\n%.2f Mb genetically unorderable (%s contig)\n%.2f Mb ambiguous (%s contig)\nvs. assembly span %.2f Mb (%.2f off)\n%s contigs', 
@@ -1080,7 +1080,7 @@ geneticPhysicalConcordance <- function(cross, dupeList, fai, mpos, pref, gterr=5
                 orit[2],
                 sum(fai$len[fai$scaf %in% omap$scaf])/1e6,
                 (sum(osum$diff)-sum(fai$len[fai$scaf %in% omap$scaf]))/1e6, 
-                len(unique(omap$scaf))
+                length(unique(omap$scaf))
     ))
     
     # write out any unoriented junctions and estimated genetic gaps
@@ -1146,7 +1146,7 @@ gatherStats <- function(WD, pref, q=1){
        bubbles = sum(mapBubbles),
        bubbled_LG = sum(mapBubbles>0),
        LG_splits = nrow(splitCtg),
-       n_map_contigs = len(unique(mm$scaf)),
+       n_map_contigs = length(unique(mm$scaf)),
        map_fai = list(fai),
        original_fai = list(ofai),
        nSNP = dSNPS[2],

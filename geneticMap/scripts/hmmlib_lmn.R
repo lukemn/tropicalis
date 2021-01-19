@@ -874,9 +874,9 @@ readProbs <- function(indiv, outdir, contigs=NULL, raw=F){
   # trim long tropicalis contig names
   # data$contig <- as.character(sapply(data$contig, function(x) rev(strsplit(x, '_')[[1]])[1]))
   ## contig, pos, bad, par1ref, par2ref, count, est, 11 12 22 posterior probs 
-  md <- melt(data[,c(1,2,12:14,16,21:24)], id = names(data)[c(1,2,12:14,16,21)], variable.name='haplotype', value.name='prob')
+  md <- melt(as.data.table(data[,c(1,2,12:14,16,21:24)]), id = names(data)[c(1,2,12:14,16,21)], variable.name='haplotype', value.name='prob')
   ## stupid high values seen where genotypes look mixed ancestry (contamination?)
-  md$prob = as.numeric(md$prob)
+  md$prob = round(as.numeric(md$prob),5)
   if(min(md$prob)<0 | max(md$prob)>1) cat(sprintf("WARNING values outside expected range seen in probs for %s:\n\tmin %.2e, %s < 0, max %.2e, %s > 1, of %s total\n", indiv, min(md$prob), sum(md$prob<0), max(md$prob), sum(md$prob>1), nrow(md)))
   md$prob = as.numeric(md$prob)
   md$prob[md$prob>1] <- 1
@@ -887,7 +887,7 @@ readProbs <- function(indiv, outdir, contigs=NULL, raw=F){
   md$prob[is.infinite(md$prob) & md$haplotype!=md$est] <- 0
   md$haplotype <- factor(md$haplotype, labels = c(paste0(species[1], species), paste0(species[2], species[2])))
   md$hid <- as.numeric(as.character(factor(md$haplotype, labels = c(-1, 0, 1))))
-  cbind(indiv, md)
+  as.data.frame(cbind(indiv, md))
 }
 
 filterBreaks <- function(probs, minpp=0.5, minBlock=1e4, minBlockMarkers=5){

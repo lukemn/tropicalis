@@ -18,13 +18,13 @@
 ##  run forward/backward algorithm given priors, reads, base quals
 ##  dump probabilities and plots (for -y)
 ##  writes data.frame : sprintf("%s/hmm_prob/%s.hmmprob.txt", dir, indiv)
-
 ## sequence lengths are assumed to be in "msg.chrLengths" (no header; chr length in first two col)
-## hmm and utility functions (ded.R, hmmlib_lmn.R, hmmprobs, countalleles etc) must be in MSGD (default ~/bin/msg/)
 
-MSGD="~/bin/msg/"
-source(sprintf("%s/ded.R", MSGD))
-source(sprintf("%s/hmmlib_lmn.R", MSGD))
+# MSGD="~/bin/msg/"
+# source(sprintf("%s/ded.R", MSGD))
+# source(sprintf("%s/hmmlib_lmn.R", MSGD))
+source("scripts/ded.R")
+source("scripts/hmmlib_lmn.R")
 library(R.methodsS3, quietly = T)
 library(R.oo, quietly = T)
 library(data.table, quietly = T)
@@ -345,10 +345,10 @@ dumpRQTL <- function(indivs, hmmdir, outdir='rqtl', bin=50, minProb=0.8, maxNA=0
   
   ## % hets
   hetc <- unlist(lapply(split(gtout[,-(1:2)], gtout$contig), function(x) sum(x=='par1par2', na.rm=T)/sum(!is.na(x))))
-  if(plot) p <- qplot(hetc, xlab = '% het by sequence'); ggsave('hetsBySeq.png', h=4, w=4)
+  if(plot) {p <- qplot(hetc, xlab = '% het by sequence'); ggsave('hetsBySeq.png', h=4, w=4)}
   sushc <- sus(hetc)
   hetm <- apply(gtout[,-(1:2)], 1, function(x) sum(x=='par1par2', na.rm=T)/sum(!is.na(x)))
-  if(plot) p <- qplot(hetm, xlab = '% het by marker'); ggsave('hetsByMarker.png', h=4, w=4)
+  if(plot) {p <- qplot(hetm, xlab = '% het by marker'); ggsave('hetsByMarker.png', h=4, w=4)}
   sushm <- sus(hetm, nsd=5, ix=T)
   hetl <- apply(gtout[,-(1:2)], 2, function(x) sum(x=='par1par2', na.rm=T)/sum(!is.na(x)))
   # drop 2 lines that are majority het
@@ -360,33 +360,33 @@ dumpRQTL <- function(indivs, hmmdir, outdir='rqtl', bin=50, minProb=0.8, maxNA=0
   ## n breakpoints by contig, line
   lbycontig <- lapply(fdata, '[[', 2) %>% Reduce(function(d1,d2) full_join(d1,d2, by=c('contig')), .)
   bycontig = apply(lbycontig[,-1], 1, function(x) sum(x, na.rm=T))
-  if(plot) p <- qplot(bycontig, xlab = 'breakpoints per sequence'); ggsave('bpBySeq.png', h=4, w=4)
+  if(plot) {p <- qplot(bycontig, xlab = 'breakpoints per sequence'); ggsave('bpBySeq.png', h=4, w=4)}
   byline = apply(lbycontig[,-1], 2, function(x) sum(x, na.rm=T))
   susbyline <- sus(byline, nsd=2)
-  if(plot) p <- qplot(byline, xlab = 'breakpoints per line'); ggsave('bpByLine.png', h=4, w=4)
+  if(plot) {p <- qplot(byline, xlab = 'breakpoints per line'); ggsave('bpByLine.png', h=4, w=4)}
   bycontigAny <- apply(lbycontig[,-1], 1, function(x) sum(x>0, na.rm=T))/(ncol(lbycontig)-1)
-  if(plot) p <- qplot(bycontigAny, xlab = '% >=1 breakpoint/line/sequence'); ggsave('bpBySeqAny.png', h=4, w=4)
+  if(plot) {p <- qplot(bycontigAny, xlab = '% >=1 breakpoint/line/sequence'); ggsave('bpBySeqAny.png', h=4, w=4)}
   
   ## breakpoints by physical distance
   contigL <- getContigLengths(f="../msg.chrLengths")
   contigL$contig <- as.character(sapply(contigL$chr, function(x) rev(strsplit(x, '_')[[1]])[1]))
   bycontig <- merge(data.frame(contig = lbycontig$contig, nb = bycontig), contigL[,-1])
   bycontig$gd <- bycontig$nb/(bycontig$length/1e6)
-  if(plot) p <- qplot(bycontig$gd, xlab = 'breakpoint per Mb'); ggsave('bpByDist.png', h=4, w=4)
-  if(plot) p <- qplot(bycontig$nb, bycontig$length/1e6, xlab = 'breakpoints', ylab = 'Mb'); ggsave('bpByMb.png', h=4, w=4)
+  if(plot) {p <- qplot(bycontig$gd, xlab = 'breakpoint per Mb'); ggsave('bpByDist.png', h=4, w=4)}
+  if(plot) {p <- qplot(bycontig$nb, bycontig$length/1e6, xlab = 'breakpoints', ylab = 'Mb'); ggsave('bpByMb.png', h=4, w=4)}
   
   ## parental proportions
   pprop <- do.call(rbind, apply(gtout[,-(1:2)], 2, function(x) as.data.frame(table(x)/len(x))))
   pprop$line <- sapply(rownames(pprop), function(x) strsplit(x, '.', fixed=T)[[1]][1])
-  if(plot) p <- ggplot(pprop, aes(Freq, fill=x)) + geom_histogram(position = 'dodge') + xlab('genotype frequencies by line'); ggsave('genoFreq.png', h=4, w=4)
+  if(plot) {p <- ggplot(pprop, aes(Freq, fill=x)) + geom_histogram(position = 'dodge') + xlab('genotype frequencies by line'); ggsave('genoFreq.png', h=4, w=4)}
   anc = c('par1par1', 'par1par2', 'par2par2')
   ppropm <- do.call(rbind, mclapply(split(gtout[,-(1:2)], gtout$contig), mc.cores = np, function(x) {
     do.call(rbind, lapply(1:nrow(x), function(i) sapply(anc, function(z) sum(x[i,]==z, na.rm=T))))
   }))
   ppropm <- cbind(gtout[,1:2], ppropm)
-  ppropm <- melt(ppropm, id = c('contig', 'pos'))
-  if(plot) p <- ggplot(ppropm, aes(value/(ncol(gtout)-2), fill=variable)) + geom_histogram(position = 'dodge') + xlab('genotype frequencies by marker'); ggsave('genoFreqMarker.png', h=4, w=4)
-  if(plot) p <- ggplot(ppropm, aes(pos/1e6, value/(ncol(gtout)-2), col=variable)) + geom_point(alpha=0.3, size=0.3) + xlab('Mb') + ylab('%') + facet_grid(.~contig, space='free', scales = 'free'); ggsave('genoFreqSeq.png', h=4, w=20)
+  ppropm <- melt(as.data.table(ppropm), id = c('contig', 'pos'))
+  if(plot) {p <- ggplot(ppropm, aes(value/(ncol(gtout)-2), fill=variable)) + geom_histogram(position = 'dodge') + xlab('genotype frequencies by marker'); ggsave('genoFreqMarker.png', h=4, w=4)}
+  if(plot) {p <- ggplot(ppropm, aes(pos/1e6, value/(ncol(gtout)-2), col=variable)) + geom_point(alpha=0.3, size=0.3) + xlab('Mb') + ylab('%') + facet_grid(.~contig, space='free', scales = 'free'); ggsave('genoFreqSeq.png', h=4, w=20)}
   
   ## interpolate missing positions where flanking markers agree (any distance, ignore edges)
   ## NA 14797632 > 862329 (bin 30)
@@ -473,7 +473,8 @@ dumpRQTL <- function(indivs, hmmdir, outdir='rqtl', bin=50, minProb=0.8, maxNA=0
   write.csv(pheno, 'pheno.csv', row.names=F, quote=F)
   
   # riself code, assuming two-class priors
-  diplos = sort(levels(bingto[,2]))
+  # this will fail if the first 10 lines do not collectively show all haplotypes
+  diplos = sort(levels(factor(unlist(bingto[,2:11]))))
   if(length(diplos)==3) diplos = diplos[c(1,3)]
   
   bingto <- do.call(rbind, bingt)
