@@ -344,32 +344,32 @@ dumpRQTL <- function(indivs, hmmdir, outdir='rqtl', bin=50, minProb=0.8, maxNA=0
     names(gtout)[1] = 'contig'
   }
   
-  ## % hets
-  hetc <- unlist(lapply(split(gtout[,-(1:2)], gtout$contig), function(x) sum(x=='par1par2', na.rm=T)/sum(!is.na(x))))
-  if(plot) {p <- qplot(hetc, xlab = '% het by sequence'); ggsave('hetsBySeq.png', h=4, w=4)}
-  sushc <- sus(hetc)
-  hetm <- apply(gtout[,-(1:2)], 1, function(x) sum(x=='par1par2', na.rm=T)/sum(!is.na(x)))
-  if(plot) {p <- qplot(hetm, xlab = '% het by marker'); ggsave('hetsByMarker.png', h=4, w=4)}
-  sushm <- sus(hetm, nsd=5, ix=T)
-  hetl <- apply(gtout[,-(1:2)], 2, function(x) sum(x=='par1par2', na.rm=T)/sum(!is.na(x)))
-  # drop 2 lines that are majority het
-  # disable for backcross
-  # if(plot) p <- qplot(hetl, xlab = '% het by line'); ggsave('hetsByLine.png', h=4, w=4)
-  # sushl = sus(hetl, nsd=2, ix=T)
-  # gtout <- gtout[,!sushl]
-  
-  ## n breakpoints by contig, line
-  lbycontig <- lapply(fdata, '[[', 2) %>% Reduce(function(d1,d2) full_join(d1,d2, by=c('contig')), .)
-  bycontig = apply(lbycontig[,-1], 1, function(x) sum(x, na.rm=T))
-  if(plot) {p <- qplot(bycontig, xlab = 'breakpoints per sequence'); ggsave('bpBySeq.png', h=4, w=4)}
-  byline = apply(lbycontig[,-1], 2, function(x) sum(x, na.rm=T))
-  susbyline <- sus(byline, nsd=2)
-  if(plot) {p <- qplot(byline, xlab = 'breakpoints per line'); ggsave('bpByLine.png', h=4, w=4)}
-  bycontigAny <- apply(lbycontig[,-1], 1, function(x) sum(x>0, na.rm=T))/(ncol(lbycontig)-1)
-  if(plot) {p <- qplot(bycontigAny, xlab = '% >=1 breakpoint/line/sequence'); ggsave('bpBySeqAny.png', h=4, w=4)}
-  
-  ## breakpoints by physical distance
   if(plot){
+    ## % hets
+    hetc <- unlist(lapply(split(gtout[,-(1:2)], gtout$contig), function(x) sum(x=='par1par2', na.rm=T)/sum(!is.na(x))))
+    p <- qplot(hetc, xlab = '% het by sequence'); ggsave('hetsBySeq.png', h=4, w=4)
+    sushc <- sus(hetc)
+    hetm <- apply(gtout[,-(1:2)], 1, function(x) sum(x=='par1par2', na.rm=T)/sum(!is.na(x)))
+    p <- qplot(hetm, xlab = '% het by marker'); ggsave('hetsByMarker.png', h=4, w=4)
+    sushm <- sus(hetm, nsd=5, ix=T)
+    hetl <- apply(gtout[,-(1:2)], 2, function(x) sum(x=='par1par2', na.rm=T)/sum(!is.na(x)))
+    # drop lines that are majority het
+    # disable for backcross
+    # if(plot) p <- qplot(hetl, xlab = '% het by line'); ggsave('hetsByLine.png', h=4, w=4)
+    # sushl = sus(hetl, nsd=2, ix=T)
+    # gtout <- gtout[,!sushl]
+    
+    ## n breakpoints by contig, line
+    lbycontig <- lapply(fdata, '[[', 2) %>% Reduce(function(d1,d2) full_join(d1,d2, by=c('contig')), .)
+    bycontig = apply(lbycontig[,-1], 1, function(x) sum(x, na.rm=T))
+    p <- qplot(bycontig, xlab = 'breakpoints per sequence'); ggsave('bpBySeq.png', h=4, w=4)
+    byline = apply(lbycontig[,-1], 2, function(x) sum(x, na.rm=T))
+    susbyline <- sus(byline, nsd=2)
+    p <- qplot(byline, xlab = 'breakpoints per line'); ggsave('bpByLine.png', h=4, w=4)
+    bycontigAny <- apply(lbycontig[,-1], 1, function(x) sum(x>0, na.rm=T))/(ncol(lbycontig)-1)
+    p <- qplot(bycontigAny, xlab = '% >=1 breakpoint/line/sequence'); ggsave('bpBySeqAny.png', h=4, w=4)
+    
+    ## breakpoints by physical distance
     contigL <- getContigLengths(f="../msg.chrLengths")
     contigL$contig <- as.character(sapply(contigL$chr, function(x) rev(strsplit(x, '_')[[1]])[1]))
     bycontig <- merge(data.frame(contig = lbycontig$contig, nb = bycontig), contigL[,-1])
