@@ -1,0 +1,73 @@
+
+Attaching package: ‘R.oo’
+
+The following object is masked from ‘package:R.methodsS3’:
+
+    throw
+
+The following objects are masked from ‘package:methods’:
+
+    getClasses, getMethods
+
+The following objects are masked from ‘package:base’:
+
+    attach, detach, load, save
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:data.table’:
+
+    between, first, last
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+$i
+[1] "qg2471,qg2472,qg2473,qg2474,qg2475,qg2476,qg2477,qg2478,qg2479,qg2480,qg2481,qg2482,qg2483,qg2484,qg2485,qg2486,qg2487,qg2489,qg2490,qg2491,qg2492,qg2493,qg2494,qg2495,qg2496,qg2497,qg2499,qg2500,qg2501,qg2502,qg2503,qg2505,qg2506,qg2507,qg2508,qg2509,qg2510,qg2511,qg2512,qg2513,qg2514,qg2515,qg2516,qg2517,qg2519,qg2520,qg2521,qg2522,qg2523,qg2524,qg2526,qg2527,qg2529,qg2530,qg2531,qg2533,qg2534,qg2535,qg2536,qg2537,qg2538,qg2539,qg2540,qg2541,qg2542,qg2545,qg2546,qg2547,qg2548,qg2549,qg2550,qg2551,qg2552,qg2553,qg2554,qg2555,qg2556,qg2557,qg2559,qg2560,qg2561,qg2562,qg2563,qg2564,qg2565,qg2566,qg2567,qg2568,qg2569,qg2570,qg2571,qg2572,qg2573,qg2574,qg2575,qg2576,qg2577,qg2578,qg2579,qg2580,qg2581,qg2582,qg2583,qg2584,qg2585,qg2587,qg2588,qg2589,qg2590,qg2591,qg2592,qg2593,qg2594,qg2595,qg2596,qg2597,qg2598,qg2599,qg2600"
+
+$t
+[1] "20"
+
+$z
+[1] "0.5,0.0,0.5"
+
+$j
+[1] "3"
+
+COLLAPSING GENOTYPES: 119 LINES ./hmm_fit > rqtl
+	Filtering to > 0.8 posterior probability
+
+              	Binning by 50 markers
+
+              	Full interpolation between markers
+
+              	Maximum marker per cent NA 0.3
+
+  [1] "qg2471" "qg2472" "qg2473" "qg2474" "qg2475" "qg2476" "qg2477" "qg2478"
+  [9] "qg2479" "qg2480" "qg2481" "qg2482" "qg2483" "qg2484" "qg2485" "qg2486"
+ [17] "qg2487" "qg2489" "qg2490" "qg2491" "qg2492" "qg2493" "qg2494" "qg2495"
+ [25] "qg2496" "qg2497" "qg2499" "qg2500" "qg2501" "qg2502" "qg2503" "qg2505"
+ [33] "qg2506" "qg2507" "qg2508" "qg2509" "qg2510" "qg2511" "qg2512" "qg2513"
+ [41] "qg2514" "qg2515" "qg2516" "qg2517" "qg2519" "qg2520" "qg2521" "qg2522"
+ [49] "qg2523" "qg2524" "qg2526" "qg2527" "qg2529" "qg2530" "qg2531" "qg2533"
+ [57] "qg2534" "qg2535" "qg2536" "qg2537" "qg2538" "qg2539" "qg2540" "qg2541"
+ [65] "qg2542" "qg2545" "qg2546" "qg2547" "qg2548" "qg2549" "qg2550" "qg2551"
+ [73] "qg2552" "qg2553" "qg2554" "qg2555" "qg2556" "qg2557" "qg2559" "qg2560"
+ [81] "qg2561" "qg2562" "qg2563" "qg2564" "qg2565" "qg2566" "qg2567" "qg2568"
+ [89] "qg2569" "qg2570" "qg2571" "qg2572" "qg2573" "qg2574" "qg2575" "qg2576"
+ [97] "qg2577" "qg2578" "qg2579" "qg2580" "qg2581" "qg2582" "qg2583" "qg2584"
+[105] "qg2585" "qg2587" "qg2588" "qg2589" "qg2590" "qg2591" "qg2592" "qg2593"
+[113] "qg2594" "qg2595" "qg2596" "qg2597" "qg2598" "qg2599" "qg2600"
+Error in UseMethod("full_join") : 
+  no applicable method for 'full_join' applied to an object of class "character"
+Calls: dumpRQTL ... withVisible -> <Anonymous> -> Reduce -> f -> full_join
+In addition: Warning message:
+In mclapply(indivs, mc.cores = np, function(i) { :
+  all scheduled cores encountered errors in user code
+Execution halted

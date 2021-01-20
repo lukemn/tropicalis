@@ -1,0 +1,8 @@
+scaf,lg,strand,len,fa,genetic_start,genetic_end,gap_cM
+Ctg002,1,-,15227767,HiC_scaffold_1,0,58.904,0
+Ctg007,1,,47036,HiC_scaffold_18,58.904,58.904,
+Ctg003,2,+,13988733,HiC_scaffold_4,0,43.953,
+Ctg006,3,-,11843500,HiC_scaffold_3,0,49.372,
+Ctg005,4,+,12284500,HiC_scaffold_5,0,40.753,
+Ctg001,5,-,15978000,HiC_scaffold_6,0,24.802,
+Ctg004,6,-,12752733,HiC_scaffold_2,0,34.057,

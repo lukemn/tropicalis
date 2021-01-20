@@ -1,0 +1,625 @@
+##
+Reading in cross, assembly and marker info
+##
+[1] "Tue Jan 19 14:35:16 2021"
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+ --Read the following data:
+	 119  individuals
+	 4418  markers
+	 2  phenotypes
+ --Cross type: riself 
+dropping 2 terminal markers
+##
+Dedupe and filtering
+##
+collapse 4024 dupes to 299 tags (spanning 82.08 Mb), 82.12 covered by all 7 marker scaffolds
+dropping 6 markers (11843500 bp) with strong segregation distortion (min class <3 | -log10 p > 20)
+                chr missing AA  BB      P.value
+Ctg006.12251 Ctg006       1  3 115 6.321407e-25
+Ctg006.12151 Ctg006       0  4 115 2.554712e-24
+Ctg006.12301 Ctg006       1  4 114 4.222390e-24
+Ctg006.12401 Ctg006       0  6 113 1.033173e-22
+Ctg006.12051 Ctg006       0  7 112 6.250340e-22
+Ctg006.12451 Ctg006       1  7 111 1.028716e-21
+##
+Form linkage groups
+##
+No apparent problems.
+   lod  n     sixes minlg maxdross
+1   15  5        NA    NA       NA
+2   16  6 1.0000000    49       NA
+3   17  6 1.0000000    49       NA
+4   18  6 1.0000000    49       NA
+5   19  6 1.0000000    49       NA
+6   20  6 1.0000000    49       NA
+7   21  6 1.0000000    49       NA
+8   22  8 0.9352332    49       19
+9   23 10 0.9196891    49       10
+10  24 10 0.9196891    49       10
+11  25 11 0.9067358    44       10
+12  26 17 0.8393782    34       11
+13  27 21 0.8108808    34       11
+
+using minimum LOD 16
+386 markers in 0 non-singleton LGs
+##
+Saving filtered cross data
+##
+[1] "ML error rate ... "
+[1] 0.0001550869
+XOs (median 7)
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  1.000   5.000   7.000   7.126   9.000  16.000 
+XOs > 99% MAD
+qg2474 
+    16 
+        n.mar length ave.spacing max.spacing
+1          78  149.3         1.9        50.0
+2          73   48.6         0.7         2.2
+3          64   54.6         0.9         5.5
+4          62   49.9         0.8         2.3
+5          60   26.3         0.4         0.9
+6          49   62.2         1.3         7.2
+overall   386  390.9         1.0        50.0
+##
+Iterating within LG marker ordering
+##
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1667  0.7350  0.9700  1.0113  1.2267  2.1000 
+improvement in LL after 50 iterations (1 XO quantile, 119 lines):
+[1] -294.8452    0.0000    0.0000    0.0000    0.0000 -172.8889
+  n.mar length ave.spacing max.spacing
+1    78  149.3         1.9        50.0
+2    73   48.6         0.7         2.2
+3    64   54.6         0.9         5.5
+4    62   49.9         0.8         2.3
+5    60   26.3         0.4         0.9
+6    49   62.2         1.3         7.2
+  n.mar length ave.spacing max.spacing
+1    78   66.0         0.9         4.2
+2    73   48.6         0.7         2.2
+3    64   54.6         0.9         5.5
+4    62   49.9         0.8         2.3
+5    60   26.3         0.4         0.9
+6    49   35.2         0.7         3.1
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1667  0.8100  1.0833  1.1229  1.3783  2.3867 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1667  0.7367  1.0133  1.0206  1.2300  2.1233 
+improvement in LL after 50 iterations (0.99 XO quantile, 117 lines):
+[1] -30.434880   0.000000   0.000000  -4.240305   0.000000 -18.918486
+  n.mar length ave.spacing max.spacing
+1    78   66.0         0.9         4.2
+2    73   48.6         0.7         2.2
+3    64   54.6         0.9         5.5
+4    62   49.9         0.8         2.3
+5    60   26.3         0.4         0.9
+6    49   35.2         0.7         3.1
+  n.mar length ave.spacing max.spacing
+1    78   64.8         0.8         3.4
+2    73   48.6         0.7         2.2
+3    64   54.6         0.9         5.5
+4    62   46.2         0.8         2.4
+5    60   26.3         0.4         0.9
+6    49   34.3         0.7         2.7
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1667  0.7667  1.0200  1.0396  1.2533  2.1533 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.2167  0.8000  1.0567  1.0713  1.3133  1.8133 
+improvement in LL after 50 iterations (0.95 XO quantile, 111 lines):
+[1] -56.318373 -33.810988 -38.315010 -61.952946  -2.060154 -32.417986
+  n.mar length ave.spacing max.spacing
+1    78   64.8         0.8         3.4
+2    73   48.6         0.7         2.2
+3    64   54.6         0.9         5.5
+4    62   46.2         0.8         2.4
+5    60   26.3         0.4         0.9
+6    49   34.3         0.7         2.7
+  n.mar length ave.spacing max.spacing
+1    78   63.9         0.8         3.6
+2    73   45.7         0.6         2.0
+3    64   48.9         0.8         4.4
+4    62   43.2         0.7         2.4
+5    60   25.9         0.4         0.9
+6    49   33.8         0.7         2.4
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.1667  0.7617  0.9900  1.0283  1.2750  1.7733 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+ 0.3333  0.6942  0.8800  0.8988  1.0858  1.4833 
+improvement in LL after 50 iterations (0.9 XO quantile, 100 lines):
+[1] -118.21386  -83.15085  -65.87821  -89.31503  -60.18797  -49.43516
+  n.mar length ave.spacing max.spacing
+1    78   63.9         0.8         3.6
+2    73   45.7         0.6         2.0
+3    64   48.9         0.8         4.4
+4    62   43.2         0.7         2.4
+5    60   25.9         0.4         0.9
+6    49   33.8         0.7         2.4
+  n.mar length ave.spacing max.spacing
+1    78   58.9         0.8         4.0
+2    73   44.0         0.6         2.1
+3    64   49.4         0.8         5.0
+4    62   40.4         0.7         2.6
+5    60   24.8         0.4         1.0
+6    49   34.1         0.7         2.6
+lewis_q100 Test full reordering by physical distance
+lewis_q100: Of 6 contigs in the map, 0 are unorientable, 2 are discordant (spanning 0 and 24128000 bp)
+lewis_q100 breaks: initial order vs. oriented order
+[[1]]
+Run Length Encoding
+  lengths: int [1:13] 30 1 1 1 21 1 1 1 2 1 ...
+  values : int [1:13] 1 2 -1 2 1 2 -1 2 1 2 ...
+
+[[2]]
+Run Length Encoding
+  lengths: int [1:25] 1 1 1 1 2 1 1 1 1 2 ...
+  values : int [1:25] 1 2 -1 2 1 2 -1 3 -1 2 ...
+
+[[3]]
+Run Length Encoding
+  lengths: int [1:19] 7 1 1 1 1 1 4 1 1 1 ...
+  values : int [1:19] 1 2 -1 3 -1 2 1 2 -1 2 ...
+
+[[4]]
+Run Length Encoding
+  lengths: int [1:9] 2 1 1 1 10 1 1 1 43
+  values : int [1:9] -1 4 -1 2 1 2 -1 2 1
+
+[[5]]
+Run Length Encoding
+  lengths: int 59
+  values : int 1
+
+[[6]]
+Run Length Encoding
+  lengths: int [1:5] 9 1 1 1 36
+  values : int [1:5] 1 2 -1 2 1
+
+lewis_q100 likelihoods for new order
+LG 1: LOD 0.000, map length -0.000, order accepted
+LG 2: LOD 0.090, map length -0.019, order accepted
+LG 3: LOD 3.144, map length -0.880, order accepted
+LG 4: LOD -0.528, map length 0.797, order accepted
+LG 5: no change
+LG 6: LOD -0.000, map length -0.000, order accepted
+lewis_q100: Of 6 contigs in the map, 0 are unorientable, 0 are discordant (spanning 0 and 0 bp)
+lewis_q100 breaks: initial order vs. oriented order
+[[1]]
+Run Length Encoding
+  lengths: int 77
+  values : int 1
+
+[[2]]
+Run Length Encoding
+  lengths: int 72
+  values : int 1
+
+[[3]]
+Run Length Encoding
+  lengths: int 63
+  values : int 1
+
+[[4]]
+Run Length Encoding
+  lengths: int 61
+  values : int 1
+
+[[5]]
+Run Length Encoding
+  lengths: int 59
+  values : int 1
+
+[[6]]
+Run Length Encoding
+  lengths: int 48
+  values : int 1
+
+lewis_q100 likelihoods for new order
+LG 1: no change
+LG 2: no change
+LG 3: no change
+LG 4: no change
+LG 5: no change
+LG 6: no change
+lewis_q100 Test case-by-case reordering by physical distance
+        n.mar length ave.spacing max.spacing
+1          78   66.0         0.9         4.2
+2          73   47.4         0.7         2.2
+3          64   50.4         0.8         4.8
+4          62   48.9         0.8         2.3
+5          60   25.8         0.4         0.9
+6          49   35.2         0.7         3.1
+overall   386  273.6         0.7         4.8
+Saving cross and map df to /scratch/lmn3/ctrop/lewis/rqtl/lewis_q100_rimap_2.rda
+lewis_q100 Add duplicate markers
+lewis_q100 Order duplicate markers
+LG 1, span vs true span 0
+
+LG 2: Ctg003 dupe split over 1 junction
+          marker genetic lg marker_scaf         dupe    start      end   scaf
+791 Ctg003.20001  13.890  2      Ctg003 Ctg003.20051 11859732 11887328 Ctg003
+792 Ctg003.20001  13.890  2      Ctg003        FALSE 11829884 11858954 Ctg003
+793 Ctg003.19901  14.314  2      Ctg003 Ctg003.20151 11929951 11983422 Ctg003
+      diff    cpos
+791  28374 2121096
+792 124468 2150944
+793 153679 2251011
+
+LG 2, span vs true span -124468
+
+LG 3, span vs true span 0
+
+LG 4, span vs true span -250672
+
+LG 5, span vs true span 0
+
+LG 6, span vs true span 0
+
+lewis_q100 After duplicate and termini addition:
+82.45 Mb ordered (6 contig)
+0.05 Mb genetically unorderable (1 contig)
+0.00 Mb ambiguous (0 contig)
+vs. assembly span 82.12 Mb (0.38 off)
+7 contigslewis_q99 Test full reordering by physical distance
+lewis_q99: Of 6 contigs in the map, 0 are unorientable, 2 are discordant (spanning 0 and 24128000 bp)
+lewis_q99 breaks: initial order vs. oriented order
+[[1]]
+Run Length Encoding
+  lengths: int [1:25] 15 1 1 1 12 1 1 1 17 1 ...
+  values : int [1:25] 1 2 -1 2 1 2 -1 2 1 2 ...
+
+[[2]]
+Run Length Encoding
+  lengths: int [1:25] 1 1 1 1 2 1 1 1 1 2 ...
+  values : int [1:25] 1 2 -1 2 1 2 -1 3 -1 2 ...
+
+[[3]]
+Run Length Encoding
+  lengths: int [1:19] 7 1 1 1 1 1 4 1 1 1 ...
+  values : int [1:19] 1 2 -1 3 -1 2 1 2 -1 2 ...
+
+[[4]]
+Run Length Encoding
+  lengths: int [1:5] 1 1 1 1 57
+  values : int [1:5] -1 2 -3 4 1
+
+[[5]]
+Run Length Encoding
+  lengths: int 59
+  values : int 1
+
+[[6]]
+Run Length Encoding
+  lengths: int [1:11] 3 1 1 1 25 1 1 1 12 1 ...
+  values : int [1:11] 1 2 -1 2 1 2 -1 2 1 2 ...
+
+lewis_q99 likelihoods for new order
+LG 1: LOD 0.000, map length -0.000, order accepted
+LG 2: LOD 0.090, map length -0.019, order accepted
+LG 3: LOD 3.245, map length -0.865, order accepted
+LG 4: LOD -0.862, map length 0.845, order accepted
+LG 5: no change
+LG 6: LOD 0.000, map length -0.000, order accepted
+lewis_q99: Of 6 contigs in the map, 0 are unorientable, 0 are discordant (spanning 0 and 0 bp)
+lewis_q99 breaks: initial order vs. oriented order
+[[1]]
+Run Length Encoding
+  lengths: int 77
+  values : int 1
+
+[[2]]
+Run Length Encoding
+  lengths: int 72
+  values : int 1
+
+[[3]]
+Run Length Encoding
+  lengths: int 63
+  values : int 1
+
+[[4]]
+Run Length Encoding
+  lengths: int 61
+  values : int 1
+
+[[5]]
+Run Length Encoding
+  lengths: int 59
+  values : int 1
+
+[[6]]
+Run Length Encoding
+  lengths: int 48
+  values : int 1
+
+lewis_q99 likelihoods for new order
+LG 1: no change
+LG 2: no change
+LG 3: no change
+LG 4: no change
+LG 5: no change
+LG 6: no change
+lewis_q99 Test case-by-case reordering by physical distance
+        n.mar length ave.spacing max.spacing
+1          78   64.8         0.8         3.4
+2          73   47.3         0.7         2.3
+3          64   49.9         0.8         4.7
+4          62   47.1         0.8         2.4
+5          60   25.8         0.4         0.9
+6          49   34.3         0.7         2.7
+overall   386  269.2         0.7         4.7
+Saving cross and map df to /scratch/lmn3/ctrop/lewis/rqtl/lewis_q99_rimap_2.rda
+lewis_q99 Add duplicate markers
+lewis_q99 Order duplicate markers
+LG 1, span vs true span 0
+
+LG 2: Ctg003 dupe split over 1 junction
+          marker genetic lg marker_scaf         dupe    start      end   scaf
+791 Ctg003.20001  14.138  2      Ctg003 Ctg003.20051 11859732 11887328 Ctg003
+792 Ctg003.20001  14.138  2      Ctg003        FALSE 11829884 11858954 Ctg003
+793 Ctg003.19901  14.569  2      Ctg003 Ctg003.20151 11929951 11983422 Ctg003
+      diff    cpos
+791  28374 2121096
+792 124468 2150944
+793 153679 2251011
+
+LG 2, span vs true span -124468
+
+LG 3, span vs true span 0
+
+LG 4, span vs true span -250672
+
+LG 5, span vs true span 0
+
+LG 6, span vs true span 0
+
+lewis_q99 After duplicate and termini addition:
+82.45 Mb ordered (6 contig)
+0.05 Mb genetically unorderable (1 contig)
+0.00 Mb ambiguous (0 contig)
+vs. assembly span 82.12 Mb (0.38 off)
+7 contigslewis_q95 Test full reordering by physical distance
+lewis_q95: Of 6 contigs in the map, 0 are unorientable, 1 are discordant (spanning 0 and 12284500 bp)
+lewis_q95 breaks: initial order vs. oriented order
+[[1]]
+Run Length Encoding
+  lengths: int [1:22] 20 1 1 1 1 1 1 1 1 16 ...
+  values : int [1:22] 1 2 -1 2 1 2 1 -2 3 1 ...
+
+[[2]]
+Run Length Encoding
+  lengths: int [1:24] 1 1 1 1 2 1 1 1 2 1 ...
+  values : int [1:24] 1 2 -1 2 1 2 -1 2 1 2 ...
+
+[[3]]
+Run Length Encoding
+  lengths: int [1:29] 2 1 1 1 3 1 1 1 5 1 ...
+  values : int [1:29] 1 2 -1 2 1 2 -1 2 1 2 ...
+
+[[4]]
+Run Length Encoding
+  lengths: int [1:12] 1 1 1 1 1 1 1 40 1 1 ...
+  values : int [1:12] -1 2 -3 4 2 -1 2 1 2 -1 ...
+
+[[5]]
+Run Length Encoding
+  lengths: int [1:9] 19 1 1 1 32 1 1 1 2
+  values : int [1:9] 1 2 -1 2 1 2 -1 2 1
+
+[[6]]
+Run Length Encoding
+  lengths: int [1:17] 5 1 1 1 1 1 1 1 2 1 ...
+  values : int [1:17] 1 2 -1 2 1 2 -1 2 1 2 ...
+
+lewis_q95 likelihoods for new order
+LG 1: LOD 0.000, map length -0.000, order accepted
+LG 2: LOD 0.000, map length 0.000, order accepted
+LG 3: LOD 0.000, map length -0.000, order accepted
+LG 4: LOD -1.172, map length 0.838, order accepted
+LG 5: LOD 0.000, map length 0.000, order accepted
+LG 6: LOD 0.000, map length -0.000, order accepted
+lewis_q95: Of 6 contigs in the map, 0 are unorientable, 0 are discordant (spanning 0 and 0 bp)
+lewis_q95 breaks: initial order vs. oriented order
+[[1]]
+Run Length Encoding
+  lengths: int 77
+  values : int 1
+
+[[2]]
+Run Length Encoding
+  lengths: int 72
+  values : int 1
+
+[[3]]
+Run Length Encoding
+  lengths: int 63
+  values : int 1
+
+[[4]]
+Run Length Encoding
+  lengths: int 61
+  values : int 1
+
+[[5]]
+Run Length Encoding
+  lengths: int 59
+  values : int 1
+
+[[6]]
+Run Length Encoding
+  lengths: int 48
+  values : int 1
+
+lewis_q95 likelihoods for new order
+LG 1: no change
+LG 2: no change
+LG 3: no change
+LG 4: no change
+LG 5: no change
+LG 6: no change
+lewis_q95 Test case-by-case reordering by physical distance
+        n.mar length ave.spacing max.spacing
+1          78   63.9         0.8         3.6
+2          73   45.7         0.6         2.0
+3          64   48.9         0.8         4.4
+4          62   44.0         0.7         2.4
+5          60   25.9         0.4         0.9
+6          49   33.8         0.7         2.4
+overall   386  262.3         0.7         4.4
+Saving cross and map df to /scratch/lmn3/ctrop/lewis/rqtl/lewis_q95_rimap_2.rda
+lewis_q95 Add duplicate markers
+lewis_q95 Order duplicate markers
+LG 1, span vs true span 0
+
+LG 2: Ctg003 dupe split over 1 junction
+          marker genetic lg marker_scaf         dupe    start      end   scaf
+791 Ctg003.20001  13.531  2      Ctg003 Ctg003.20051 11859732 11887328 Ctg003
+792 Ctg003.20001  13.531  2      Ctg003        FALSE 11829884 11858954 Ctg003
+793 Ctg003.19901  13.986  2      Ctg003 Ctg003.20151 11929951 11983422 Ctg003
+      diff    cpos
+791  28374 2121096
+792 124468 2150944
+793 153679 2251011
+
+LG 2, span vs true span -124468
+
+LG 3, span vs true span 0
+
+LG 4, span vs true span -250672
+
+LG 5, span vs true span 0
+
+LG 6, span vs true span 0
+
+lewis_q95 After duplicate and termini addition:
+82.45 Mb ordered (6 contig)
+0.05 Mb genetically unorderable (1 contig)
+0.00 Mb ambiguous (0 contig)
+vs. assembly span 82.12 Mb (0.38 off)
+7 contigslewis_q90 Test full reordering by physical distance
+lewis_q90: Of 6 contigs in the map, 0 are unorientable, 1 are discordant (spanning 0 and 12284500 bp)
+lewis_q90 breaks: initial order vs. oriented order
+[[1]]
+Run Length Encoding
+  lengths: int [1:28] 11 1 1 1 1 1 1 1 1 1 ...
+  values : int [1:28] 1 2 -1 2 1 2 -1 2 1 3 ...
+
+[[2]]
+Run Length Encoding
+  lengths: int [1:28] 1 1 17 1 1 1 6 1 1 1 ...
+  values : int [1:28] -1 2 1 2 -1 2 1 2 -1 2 ...
+
+[[3]]
+Run Length Encoding
+  lengths: int [1:33] 2 1 1 2 1 2 1 1 5 1 ...
+  values : int [1:33] 1 2 -1 2 -1 2 -1 2 1 2 ...
+
+[[4]]
+Run Length Encoding
+  lengths: int [1:25] 1 1 1 1 1 1 1 1 20 1 ...
+  values : int [1:25] -1 2 1 -4 7 -2 1 2 1 2 ...
+
+[[5]]
+Run Length Encoding
+  lengths: int [1:21] 7 1 1 1 15 1 1 1 9 1 ...
+  values : int [1:21] 1 2 -1 2 1 2 -1 2 1 3 ...
+
+[[6]]
+Run Length Encoding
+  lengths: int [1:31] 4 1 2 1 1 1 1 2 1 1 ...
+  values : int [1:31] 1 3 -1 4 -1 3 -1 2 -1 3 ...
+
+lewis_q90 likelihoods for new order
+LG 1: LOD 0.000, map length -0.000, order accepted
+LG 2: LOD 0.000, map length -0.000, order accepted
+LG 3: LOD 0.000, map length -0.000, order accepted
+LG 4: LOD -1.774, map length 0.381, order accepted
+LG 5: LOD 0.000, map length 0.000, order accepted
+LG 6: LOD 0.000, map length -0.000, order accepted
+lewis_q90: Of 6 contigs in the map, 0 are unorientable, 0 are discordant (spanning 0 and 0 bp)
+lewis_q90 breaks: initial order vs. oriented order
+[[1]]
+Run Length Encoding
+  lengths: int 77
+  values : int 1
+
+[[2]]
+Run Length Encoding
+  lengths: int 72
+  values : int 1
+
+[[3]]
+Run Length Encoding
+  lengths: int 63
+  values : int 1
+
+[[4]]
+Run Length Encoding
+  lengths: int 61
+  values : int 1
+
+[[5]]
+Run Length Encoding
+  lengths: int 59
+  values : int 1
+
+[[6]]
+Run Length Encoding
+  lengths: int 48
+  values : int 1
+
+lewis_q90 likelihoods for new order
+LG 1: no change
+LG 2: no change
+LG 3: no change
+LG 4: no change
+LG 5: no change
+LG 6: no change
+lewis_q90 Test case-by-case reordering by physical distance
+        n.mar length ave.spacing max.spacing
+1          78   58.9         0.8         4.0
+2          73   44.0         0.6         2.1
+3          64   49.4         0.8         5.0
+4          62   40.8         0.7         2.6
+5          60   24.8         0.4         1.0
+6          49   34.1         0.7         2.6
+overall   386  251.8         0.7         5.0
+Saving cross and map df to /scratch/lmn3/ctrop/lewis/rqtl/lewis_q90_rimap_2.rda
+lewis_q90 Add duplicate markers
+lewis_q90 Order duplicate markers
+LG 1, span vs true span 0
+
+LG 2: Ctg003 dupe split over 1 junction
+           marker genetic lg marker_scaf         dupe    start      end   scaf
+1129 Ctg003.19901  31.445  2      Ctg003 Ctg003.19951 11794828 11829743 Ctg003
+1130 Ctg003.19901  31.445  2      Ctg003 Ctg003.20151 11929951 11983422 Ctg003
+1131 Ctg003.20001  31.951  2      Ctg003        FALSE 11829884 11858954 Ctg003
+       diff     cpos
+1129  34974 11794829
+1130 153679 11929952
+1131 124468 12030019
+
+LG 2, span vs true span -95257
+
+LG 3, span vs true span 0
+
+LG 4, span vs true span -250672
+
+LG 5, span vs true span 0
+
+LG 6, span vs true span 0
+
+lewis_q90 After duplicate and termini addition:
+82.42 Mb ordered (6 contig)
+0.05 Mb genetically unorderable (1 contig)
+0.00 Mb ambiguous (0 contig)
+vs. assembly span 82.12 Mb (0.35 off)
+7 contigs

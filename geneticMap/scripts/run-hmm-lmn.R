@@ -30,6 +30,7 @@ library(R.oo, quietly = T)
 library(data.table, quietly = T)
 library(parallel, quietly = T)
 library(dplyr, quietly = T)
+library(ggplot2)
 Sys.setenv(OMP_NUM_THREADS = 1)
 # options(error=quote(q("yes")))
 
@@ -368,25 +369,27 @@ dumpRQTL <- function(indivs, hmmdir, outdir='rqtl', bin=50, minProb=0.8, maxNA=0
   if(plot) {p <- qplot(bycontigAny, xlab = '% >=1 breakpoint/line/sequence'); ggsave('bpBySeqAny.png', h=4, w=4)}
   
   ## breakpoints by physical distance
-  contigL <- getContigLengths(f="../msg.chrLengths")
-  contigL$contig <- as.character(sapply(contigL$chr, function(x) rev(strsplit(x, '_')[[1]])[1]))
-  bycontig <- merge(data.frame(contig = lbycontig$contig, nb = bycontig), contigL[,-1])
-  bycontig$gd <- bycontig$nb/(bycontig$length/1e6)
-  if(plot) {p <- qplot(bycontig$gd, xlab = 'breakpoint per Mb'); ggsave('bpByDist.png', h=4, w=4)}
-  if(plot) {p <- qplot(bycontig$nb, bycontig$length/1e6, xlab = 'breakpoints', ylab = 'Mb'); ggsave('bpByMb.png', h=4, w=4)}
-  
-  ## parental proportions
-  pprop <- do.call(rbind, apply(gtout[,-(1:2)], 2, function(x) as.data.frame(table(x)/len(x))))
-  pprop$line <- sapply(rownames(pprop), function(x) strsplit(x, '.', fixed=T)[[1]][1])
-  if(plot) {p <- ggplot(pprop, aes(Freq, fill=x)) + geom_histogram(position = 'dodge') + xlab('genotype frequencies by line'); ggsave('genoFreq.png', h=4, w=4)}
-  anc = c('par1par1', 'par1par2', 'par2par2')
-  ppropm <- do.call(rbind, mclapply(split(gtout[,-(1:2)], gtout$contig), mc.cores = np, function(x) {
-    do.call(rbind, lapply(1:nrow(x), function(i) sapply(anc, function(z) sum(x[i,]==z, na.rm=T))))
-  }))
-  ppropm <- cbind(gtout[,1:2], ppropm)
-  ppropm <- melt(as.data.table(ppropm), id = c('contig', 'pos'))
-  if(plot) {p <- ggplot(ppropm, aes(value/(ncol(gtout)-2), fill=variable)) + geom_histogram(position = 'dodge') + xlab('genotype frequencies by marker'); ggsave('genoFreqMarker.png', h=4, w=4)}
-  if(plot) {p <- ggplot(ppropm, aes(pos/1e6, value/(ncol(gtout)-2), col=variable)) + geom_point(alpha=0.3, size=0.3) + xlab('Mb') + ylab('%') + facet_grid(.~contig, space='free', scales = 'free'); ggsave('genoFreqSeq.png', h=4, w=20)}
+  if(plot){
+    contigL <- getContigLengths(f="../msg.chrLengths")
+    contigL$contig <- as.character(sapply(contigL$chr, function(x) rev(strsplit(x, '_')[[1]])[1]))
+    bycontig <- merge(data.frame(contig = lbycontig$contig, nb = bycontig), contigL[,-1])
+    bycontig$gd <- bycontig$nb/(bycontig$length/1e6)
+    p <- qplot(bycontig$gd, xlab = 'breakpoint per Mb'); ggsave('bpByDist.png', h=4, w=4)
+    p <- qplot(bycontig$nb, bycontig$length/1e6, xlab = 'breakpoints', ylab = 'Mb'); ggsave('bpByMb.png', h=4, w=4)
+    
+    ## parental proportions
+    pprop <- do.call(rbind, apply(gtout[,-(1:2)], 2, function(x) as.data.frame(table(x)/len(x))))
+    pprop$line <- sapply(rownames(pprop), function(x) strsplit(x, '.', fixed=T)[[1]][1])
+    if(plot) {p <- ggplot(pprop, aes(Freq, fill=x)) + geom_histogram(position = 'dodge') + xlab('genotype frequencies by line'); ggsave('genoFreq.png', h=4, w=4)}
+    anc = c('par1par1', 'par1par2', 'par2par2')
+    ppropm <- do.call(rbind, mclapply(split(gtout[,-(1:2)], gtout$contig), mc.cores = np, function(x) {
+      do.call(rbind, lapply(1:nrow(x), function(i) sapply(anc, function(z) sum(x[i,]==z, na.rm=T))))
+    }))
+    ppropm <- cbind(gtout[,1:2], ppropm)
+    ppropm <- melt(as.data.table(ppropm), id = c('contig', 'pos'))
+    p <- ggplot(ppropm, aes(value/(ncol(gtout)-2), fill=variable)) + geom_histogram(position = 'dodge') + xlab('genotype frequencies by marker'); ggsave('genoFreqMarker.png', h=4, w=4)
+    p <- ggplot(ppropm, aes(pos/1e6, value/(ncol(gtout)-2), col=variable)) + geom_point(alpha=0.3, size=0.3) + xlab('Mb') + ylab('%') + facet_grid(.~contig, space='free', scales = 'free'); ggsave('genoFreqSeq.png', h=4, w=20)
+  }
   
   ## interpolate missing positions where flanking markers agree (any distance, ignore edges)
   ## NA 14797632 > 862329 (bin 30)
@@ -420,8 +423,8 @@ dumpRQTL <- function(indivs, hmmdir, outdir='rqtl', bin=50, minProb=0.8, maxNA=0
       }
     }
   }))
-  if(plot) p <- qplot(binnedbp$switch, xlab = sprintf('sum breakpoints (%s marker bins)', bin)); ggsave('bpBin.png', h=4, w=4)
-  if(plot) p <- ggplot(subset(binnedbp, switch>0), aes(start/1e6, switch)) + geom_point() + labs(x='Mb', y = sprintf('sum breakpoints (%s marker bins >0)', bin)) + facet_grid(.~contig, space='free', scale='free'); ggsave('bpBinContig.png', h=3, w=30)
+  if(plot) {p <- qplot(binnedbp$switch, xlab = sprintf('sum breakpoints (%s marker bins)', bin)); ggsave('bpBin.png', h=4, w=4)}
+  if(plot) {p <- ggplot(subset(binnedbp, switch>0), aes(start/1e6, switch)) + geom_point() + labs(x='Mb', y = sprintf('sum breakpoints (%s marker bins >0)', bin)) + facet_grid(.~contig, space='free', scale='free'); ggsave('bpBinContig.png', h=3, w=30)}
   write.table(binnedbp, file = sprintf('bin%s.markerpos.txt', bin), row.names=F, quote=F, sep='\t')
   
   ## make rqtl cross files using binned data as pseudomarkers (or majority assignment if < bin)
