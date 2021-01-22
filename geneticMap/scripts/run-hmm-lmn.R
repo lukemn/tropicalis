@@ -20,10 +20,11 @@
 ##  writes data.frame : sprintf("%s/hmm_prob/%s.hmmprob.txt", dir, indiv)
 ## sequence lengths are assumed to be in "msg.chrLengths" (no header; chr length in first two col)
 
-# requires MSG and additional R code (below) and two C routines (countalleles, hmmprobs)
-MSGD="scripts"
-source(sprintf("%s/ded.R", MSGD))
-source(sprintf("%s/hmmlib_lmn.R", MSGD))
+# MSGD="~/bin/msg/"
+# source(sprintf("%s/ded.R", MSGD))
+# source(sprintf("%s/hmmlib_lmn.R", MSGD))
+source("scripts/ded.R")
+source("scripts/hmmlib_lmn.R")
 library(R.methodsS3, quietly = T)
 library(R.oo, quietly = T)
 library(data.table, quietly = T)
