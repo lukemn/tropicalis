@@ -212,7 +212,7 @@ startingMap <- function(WD, pref, XO_MAD_quantiles=c(0.9, 0.95, 0.99, 1)){
   # else the value that maximises the number of markers in the first 6 LGs
   lodlg = data.frame(lod=lodr, n, sixes, minlg, maxdross)
   print(lodlg)
-  stopifnot(max(lodlg$n)>6)
+  stopifnot(max(lodlg$n)>=6)
   if(sum(lodlg$n==6)>0){
     minLOD = min(lodlg$lod[lodlg$n==6])  
   } else {
